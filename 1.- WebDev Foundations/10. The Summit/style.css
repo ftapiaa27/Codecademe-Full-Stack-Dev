@@ -1,0 +1,55 @@
+a {
+    color: #2176FF;
+    cursor: pointer;
+    text-decoration-line: underline;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+  }
+  
+  .nav-link:hover {
+    color: #5495ff;
+  }
+  
+  .btn {
+    background-color: #fdc18d;
+    border: none;
+    color: #2a62a7;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    border-radius: 15px;
+    font-family: 'Raleway', sans-serif;
+    box-shadow: 0 8px #866450;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .btn:hover {
+    background-color: #faae70;
+  }
+  
+  .btn:active {
+    background-color: #faae70;
+    box-shadow: 0 4px #6a5045;
+    transform: translateY(4px);
+  }
+  
+  .activity:hover {
+    background-color: #16355a;
+  }
+  
+  .activity:active {
+    background-color: #16355a;
+    width: 234px;
+    height: 194px;
+    margin: 5px 8px;
+    
+    transform: translateY(3px);
+  }
