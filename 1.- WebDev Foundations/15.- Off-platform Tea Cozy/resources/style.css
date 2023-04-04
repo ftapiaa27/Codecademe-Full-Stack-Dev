@@ -1,0 +1,134 @@
+* {
+    /* border: 1px solid red; */
+}
+
+html, main, body, section {
+    background-color: black;
+    font-family: Helvetica, sans-serif;
+    font-size: 22px;
+    color: seashell;
+    opacity: 0.9;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+}
+header {
+    top: 0px;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 69px;
+    margin: 0;
+    border-bottom: 1px solid seashell;
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+    background-color: black;
+}
+header img {
+    height: 50px;
+    margin: 0 10px;
+}
+header nav {
+    display: inline-flex;
+    align-items: center;
+    height: 69px;
+}
+header nav a{
+    padding: 10px;
+    margin: 10px;
+    color: gray;
+}
+header nav a:hover {
+    color: white;
+}
+#mission {
+    margin-top: 69px;
+    display: flex;
+    justify-content: center;
+}
+.banner {
+    background-image: url('./img-mission-background.webp');
+    background-size: cover;
+    background-position: center top;
+    height: 700px;
+    width: 1200px;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+.banner .msg{
+    background-color: black;
+    position: relative;
+    padding: 10px;
+    margin: 0;
+
+}
+#teaofthemonth {
+    display:flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.gallery {
+    width: 1000px;
+    text-align: center;
+}
+.gallery .text {
+    padding: 10px;
+    margin: 10px;
+}
+.tea {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.tea figure {
+    margin: 0 0 20px 0;
+}
+.tea img {
+    height: 200px;
+    width: 300px;
+}
+.tea figcaption {
+    margin-top: 10px;
+}
+#locations {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.locations {
+    width: 1200px;
+    height: 500px;
+    background-image: url("./img-locations-background.webp");
+    background-position: center top;
+    display: flex; 
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.locations > h1 {
+    margin: 15px;
+    padding: 0;
+    text-align: center;
+}
+.locations .addresses {
+    display: inline-flex;
+}
+.locations .location {
+    background-color: black;
+    width: 300px;
+    margin: 0 20px;
+    text-align: center;
+    padding: 0;
+}
+footer .contact{
+    height: 200px;
+    text-align: center;
+}
+footer > h5 {
+    margin: 20px;
+}
