@@ -1,0 +1,114 @@
+html, body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+}
+
+/* HEADER */
+header {
+    position: fixed;
+    width: 100%;
+    border-bottom: solid brown;
+    background-color: beige;
+    margin: 0;
+    top: 0;
+}
+
+header .mobile {
+    display: none;
+}
+
+header .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 1rem;
+}
+
+header .logo {
+    color: brown;
+    font-family: 'Dancing Script';
+    font-size: 3rem;
+    margin: 0;
+}
+
+header ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+    margin: 0;
+}
+
+header li {
+    padding: 0;
+    margin: 0 1rem;
+}
+
+header a { 
+    text-decoration: none;
+    color: #4a4a4a;
+}
+
+header a:hover { 
+    text-decoration: none;
+    color: #4a4a4a;
+}
+
+header a:hover { 
+    text-decoration: none;
+    color: #4a4a4a;
+}
+
+header button {
+    padding: 0.75rem;
+    border: none;
+    margin: 0 0.2rem;
+    color: white;
+    background-color: #4a4a4a;
+    border-radius: 1rem;
+}
+
+header button:hover {
+    cursor: pointer;
+    background-color: #333;
+}
+
+@media only screen and (max-width: 760px) {
+    header .desktop {
+        display: none;
+    }
+
+    header .mobile {
+        display: block;
+    }
+}
+
+/* MAIN */
+
+main {
+    position: relative;
+    top: 5rem;
+}
+
+main .welcome {
+    background-image: url("https://media.npr.org/assets/img/2017/02/23/formal-portrait-national-symphony-orchestra-music-director-christoph-eschenbach-photo-by-scott-suchman-2014_wide-ff22a334d90069efec3790bf7b0bf199c10bf595.jpeg?s=1400");
+    background-size: cover;
+    background-position: bottom;
+    height: auto;
+    margin: 0;
+    height: 20rem;
+    display: flex;
+}
+
+.welcome .content {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    margin: 3rem;
+    max-width: 17rem;
+    border-radius: 4rem;
+}
+
+
+
+
