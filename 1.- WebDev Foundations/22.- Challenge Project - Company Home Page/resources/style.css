@@ -1,6 +1,7 @@
 html, body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
+    background-color: #f3f3f3;
 }
 
 /* HEADER */
@@ -88,10 +89,11 @@ header button:hover {
 main {
     position: relative;
     top: 5rem;
+    background-color: whitesmoke;
 }
 
 main .welcome {
-    background-image: url("https://media.npr.org/assets/img/2017/02/23/formal-portrait-national-symphony-orchestra-music-director-christoph-eschenbach-photo-by-scott-suchman-2014_wide-ff22a334d90069efec3790bf7b0bf199c10bf595.jpeg?s=1400");
+    background-image: url("img/orchestra.jpeg");
     background-size: cover;
     background-position: bottom;
     height: auto;
@@ -101,14 +103,136 @@ main .welcome {
 }
 
 .welcome .content {
-    color: white;
+    color: #f3f3f3;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 2rem;
     margin: 3rem;
     max-width: 17rem;
     border-radius: 4rem;
 }
+/* ABOUT */
+#about {
+    background-image: url('img/palermo.jpg');
+    background-size: cover;
+    height: 20rem;
+    background-position: bottom;
+    top: 0;
+    margin: 1rem;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
 
+#about .content {
+    margin: 1rem;
+    padding: 1rem;
+    max-width: 30rem;
+    justify-self: end;
+}
 
+#about h3 {
+    color: white;
+    font-size: 2rem;
+}
 
+@media only screen and (max-width: 760px) {
+    #about h3 {
+        font-size: 1rem;
+    }
+}
+/* PRODUCTS */
+#products h2 {
+    margin-left: 2rem;
+}
 
+#products {
+    display: flex;
+    flex-flow: column;
+} 
+
+.gallery figure {
+    background-color: white;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5rem;
+}
+
+.gallery img {
+    display: block;
+    width: 90%;
+    height: auto;
+    margin: 1rem auto;
+    padding: auto;
+}
+
+.string .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.keyboard .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media only screen and (max-width: 760px) {
+    .gallery figure {
+        margin: 0.5rem;
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #products h2 {
+        font-size: 1.25rem;
+    }
+    /* #products .gallery {
+        display: block;
+    } */
+    .string .gallery {
+        display: block;
+    }
+
+    .keyboard {
+        background-color: white;
+    }
+    
+    .keyboard .gallery figure {
+        
+        background-color: white;
+    }
+    .keyboard .gallery {
+        display: block;
+    }
+    .gallery figure {
+        padding: 1.5rem;
+        margin: 0;
+        font-size: 1.25rem;
+        background-color: #f5f5f5;
+    }
+
+}
+
+/* FOOTER */
+
+footer {
+    background-color: #4a4a4a;
+    display: inline-flex;
+    flex-flow: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+footer p {
+    padding: 1rem;
+    color: white;
+}
+
+@media only screen and (max-width: 500px) {
+    footer p {
+        font-size: 0.75rem;
+    }
+}
