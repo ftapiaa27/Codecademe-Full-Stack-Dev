@@ -34,7 +34,7 @@ export const ContactsPage = ( { contacts, addContact } ) => {
   contacts array variable in props
   */
   useEffect(() => {
-    setIsDuplicate(contacts.every((contact) => contact.name !== name));
+    setIsDuplicate(!(contacts.every((contact) => contact.name !== name)));
   }, [name]);
 
   return (
@@ -54,7 +54,7 @@ export const ContactsPage = ( { contacts, addContact } ) => {
       <hr />
       <section>
         <h2>Contacts</h2>
-        <TileList contacts={contacts} />
+        <TileList list={contacts} />
       </section>
     </div>
   );
