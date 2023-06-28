@@ -15,13 +15,12 @@ const Comments = () => {
   // Declare additional selected data here.
   const comments = useSelector(selectComments);
   const commentsAreLoading = useSelector(isLoadingComments);
+  const commentsForArticleId = article ? comments[article.id] : [];
 
-  const commentsForArticleId = [];
   // Dispatch loadCommentsForArticleId with useEffect here.
   useEffect(() => {
     if (article) {
-      commentsForArticleId = comments[article.id];
-      dispatch(loadCommentsForArticleId(article.id))
+      dispatch(loadCommentsForArticleId(article.id));
     }
   }, [dispatch, article])
   if (commentsAreLoading) return <div>Loading Comments</div>;

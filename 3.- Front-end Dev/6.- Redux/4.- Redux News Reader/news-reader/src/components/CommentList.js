@@ -8,9 +8,9 @@ export default function CommentList({ comments }) {
   
   return (
     <ul className='comments-list'>
-      {comments.map(comment => (
+      {comments.map(comment => 
         <Comment comment={comment}/>
-      ))}
+      )}
     </ul>
   );
 }
