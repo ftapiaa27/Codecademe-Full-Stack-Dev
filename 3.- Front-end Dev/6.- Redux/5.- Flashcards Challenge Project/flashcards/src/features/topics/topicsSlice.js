@@ -7,15 +7,19 @@ export const topics = createSlice({
     },
     reducers: {
         addTopic: (state, action) => {
+            // let topicId = Object.keys(state.topics).length;
             state.topics[action.payload.id] = {...action.payload, quizIds: []}
+        },
+        addQuizId: (state, action) => {
+            state.topics[action.payload.topicId].quizIds.push(action.payload.quizId);
         }
     },
     extraReducers: {}
 
 })
 
-export const selectTopics = (state) => state.topics;
-export const { addTopic } = topics.actions;
+export const selectTopics = (state) => state.topics.topics;
+export const { addTopic, addQuizId } = topics.actions;
 export default topics.reducer;
 /*
     TOPICS SLICE TEMPLATE

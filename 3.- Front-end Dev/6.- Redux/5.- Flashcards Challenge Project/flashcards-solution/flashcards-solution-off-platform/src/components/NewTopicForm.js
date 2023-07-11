@@ -1,24 +1,25 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { addTopic } from "../features/topics/topicsSlice";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
 import { ALL_ICONS } from "../data/icons";
-import { addTopic } from "../features/topics/topicsSlice";
-import { useDispatch } from "react-redux";
-import { addCard } from "../features/cards/cardsSlice";
 
 export default function NewTopicForm() {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [icon, setIcon] = useState("");
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name.length === 0) {
       return;
     }
-    dispatch(addTopic({id: uuidv4(), name: name, icon: icon}));
-    navigate(ROUTES.topicsRoute());
+
+    dispatch(addTopic({ name: name, id: uuidv4(), icon }));
+    history.push(ROUTES.topicsRoute());
   };
 
   return (

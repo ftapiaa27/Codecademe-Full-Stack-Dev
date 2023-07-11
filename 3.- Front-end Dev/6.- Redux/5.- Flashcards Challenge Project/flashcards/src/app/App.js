@@ -5,6 +5,7 @@ import {
   Route,
   NavLink,
   useMatch,
+  useMatches,
 } from "react-router-dom";
 import NewQuizForm from "../components/NewQuizForm";
 import NewTopicForm from "../components/NewTopicForm";
@@ -20,17 +21,17 @@ export default function App() {
       <nav>
         <ul>
           <li>
-            <NavLink to={ROUTES.topicsRoute()} activeClassName="active">
+            <NavLink to={ROUTES.topicsRoute()}>
               Topics
             </NavLink>
           </li>
           <li>
-            <NavLink to={ROUTES.quizzesRoute()} activeClassName="active">
+            <NavLink to={ROUTES.quizzesRoute()}>
               Quizzes
             </NavLink>
           </li>
           <li>
-            <NavLink to={ROUTES.newQuizRoute()} activeClassName="active">
+            <NavLink to={ROUTES.newQuizRoute()}>
               New Quiz
             </NavLink>
           </li>
@@ -38,36 +39,33 @@ export default function App() {
       </nav>
 
       <Routes>
-        <Route path="/topics" element={<TopicsRoutes />}/>
-        <Route path="/quizzes" element={<QuizRoutes />} />
+        <Route path="/" element={<h1>Hello there!</h1>}/>
+        <Route path="/topics//*" element={<TopicsRoutes />}/> 
+        <Route path="/quizzes//*" element={<QuizRoutes />} />
       </Routes>
     </Router>
   );
 }
 
 function TopicsRoutes() {
-  let match = useMatch();
-
   return (
     <>
       <Routes>
-        <Route path={`${match.path}/new`} element={<NewTopicForm />} />
-        <Route path={`${match.path}/:topicId`} element={<Topic />} />
-        <Route path={`${match.path}`} element={<Topics />} />
+        <Route path={"new"} element={<NewTopicForm />} />
+        <Route path={":topicId"} element={<Topic />} />
+        <Route index element={<Topics />} />
       </Routes>
     </>
   );
 }
 
 function QuizRoutes() {
-  let match = useMatch();
-
   return (
     <>
       <Routes>
-        <Route path={`${match.path}/new`} element={<NewQuizForm />} />
-        <Route path={`${match.path}/:quizId`} element={<Quiz />} />
-        <Route path={`${match.path}`} element={<Quizzes />} />
+        <Route path={"new"} element={<NewQuizForm />} />
+        <Route path={":quizId"} element={<Quiz />} />
+        <Route index element={<Quizzes />} />
       </Routes>
     </>
   );
