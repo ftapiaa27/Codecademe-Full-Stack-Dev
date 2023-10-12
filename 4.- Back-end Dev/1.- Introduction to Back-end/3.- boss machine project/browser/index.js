@@ -93,7 +93,24 @@ const allIdeasEnter = () => {
   store.dispatch(resetEditingState())
 }
 
-ReactDOM.render(
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <Router history={hashHistory}>
+//       <Route path="/" component={App} onEnter={appEnter}>
+//         <IndexRoute component={Home} />
+//         <Route path="/minions" component={AllMinions} />
+//         <Route path="/minions/new" onEnter={newMinionEnter} components={Minion} />
+//         <Route path="/minions/:id" onEnter={singleMinionEnter} components={Minion} />
+//         <Route path="/ideas" onEnter={allIdeasEnter} components={AllIdeas} />
+//         <Route path="/ideas/new" onEnter={newIdeaEnter} components={Idea}/>
+//         <Route path="/ideas/:id" onEnter={singleIdeaEnter} components={Idea} />
+//       </Route>
+//     </Router>
+//   </Provider>,
+//   document.getElementById('app')
+// );
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={App} onEnter={appEnter}>
@@ -106,6 +123,5 @@ ReactDOM.render(
         <Route path="/ideas/:id" onEnter={singleIdeaEnter} components={Idea} />
       </Route>
     </Router>
-  </Provider>,
-  document.getElementById('app')
+  </Provider>
 );
