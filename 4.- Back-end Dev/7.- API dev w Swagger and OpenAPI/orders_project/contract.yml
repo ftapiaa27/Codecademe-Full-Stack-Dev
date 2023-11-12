@@ -1,0 +1,115 @@
+openapi: 3.0.2
+info:
+  title: Online Order API
+  version: 1.0.0
+  description: A basic API for working with the Swagger tools.
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /orders:
+    get:
+      summary: Get all of the orders data.
+      description: >-
+        This path is used to retrieve all of the orders data from the
+        orders.json file.
+      parameters: []
+      operationId: get_orders
+      tags:
+        - Orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                orders:
+                  value: >-
+                    {"orders":[{"name":"Carey
+                    Maynard","id":"001","state":"pending"},{"name":"Angelo
+                    Ayala","id":"002","state":"canceled"},{"name":"Regina
+                    Yates","id":"003","state":"pending"},{"name":"Elliott
+                    Mcclure","id":"004","state":"pending"}]}
+  /neworder:
+    post:
+      summary: Add new orders.
+      description: This path is used to add a new order to the orders.json file.
+      parameters: []
+      operationId: add_order
+      tags:
+        - New Order
+      requestBody:
+        description: A new order object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              examples:
+                new order:
+                  value: >-
+                    {"name":"Valeria Carlson","id":"005","state":"pending"}
+  /update/{id}:
+    put:
+      summary: Update the state of an orders.
+      description: >-
+        This path is used to change the status of an order matching the provided
+        id. It modifies the state attribute of each order.
+      operationId: update_order
+      tags:
+        - Update Order
+      parameters:
+        - name: id
+          in: path
+          description: 'The id of the order to update.'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                update order 1:
+                  value: 'Order updated with id: 1'
+  /delete/{id}:
+    delete:
+      summary: Delete an order.
+      description: This path is used to delete an order with a matching id.
+      parameters:
+        - name: id
+          in: path
+          description: 'The id of the order to delete.'
+          required: true
+          schema:
+            type: string
+      operationId: delete_order
+      tags:
+        - Delete Order
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain; charset=utf-8:
+              examples:
+                delete order 1:
+                  value: 'Order deleted with id: 1'
+                  
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+        state:
+          type: string
+      xml:
+        name: Order
