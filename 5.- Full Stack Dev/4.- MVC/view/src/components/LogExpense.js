@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Box from '@mui/material/Box';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { InputLabel, MenuItem, Select } from '@mui/material';
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers"
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import React, { useState, useEffect } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Box from "@mui/material/Box";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { InputLabel, MenuItem, Select } from "@mui/material";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import {
+  createExpense,
+  fetchExpense,
   formSetter,
-} from '../utils';
-
+  updateExpense
+} from "../utils";
 const theme = createTheme();
 
 const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
   const [expense, setExpense] = useState({
-    title: '',
-    price: '',
-    category: '',
+    title: "",
+    price: "",
+    category: "",
     essential: false,
     created_at: new Date().toISOString()
   });
@@ -32,7 +34,7 @@ const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
 
   const setExpenseData = async (id) => {
     // update view w/ data from model
-    const expenseById = '';
+    const expenseById = await fetchExpense(id);
     setExpense(expenseById[0]);
   };
 
@@ -46,29 +48,30 @@ const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
     if (res) {
       return setErr(res);
     }
-    refreshExpenses()
-    handleClose()
+
+    refreshExpenses();
+    handleClose();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (data.get('essential') === null) {
-      data.set('essential', false);
+    if (data.get("essential") === null) {
+      data.set("essential", false);
     }
     if (_id) {
       formSetter(data, expense);
       // update data from model w/ controller
-      const res = '';
+      const res = await updateExpense(_id, data);
       expenseListRefresh(res);
-    } else {      
+    } else {
       // add data to model w/ controller
-      data.set('created_at', expense.created_at);
-      const res = '';
+      data.set("created_at", expense.created_at);
+      const res = await createExpense(data);
       expenseListRefresh(res);
     }
   };
-  
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -76,16 +79,16 @@ const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <AttachMoneyIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            {_id ? 'Update Expense' : 'New Expense'}
+            {_id ? "Update Expense" : "New Expense"}
           </Typography>
           <Box
             component="form"
@@ -105,7 +108,7 @@ const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
               label="Expense Title"
               name="title"
               autoComplete="title"
-              error={err.includes('title') && true}
+              error={err.includes("title") && true}
               autoFocus
             />
             <div id="new-date">
@@ -113,11 +116,14 @@ const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
                 <DatePicker
                   label="Date of Expense"
                   value={new Date(expense.created_at)}
-                  minDate={new Date('2017-01-01')}
+                  minDate={new Date("2017-01-01")}
                   onChange={(newValue) => {
-                    setExpense({ ...expense, created_at: newValue.toISOString() });
+                    setExpense({
+                      ...expense,
+                      created_at: newValue.toISOString()
+                    });
                   }}
-                  slotProps={{ textField: { variant: 'outlined' } }}
+                  slotProps={{ textField: { variant: "outlined" } }}
                 />
               </LocalizationProvider>
             </div>
@@ -135,13 +141,13 @@ const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
               type="number"
               id="price"
               autoComplete="price"
-              error={err.includes('price') && true}
+              error={err.includes("price") && true}
             />
             <InputLabel id="category">Expense Category</InputLabel>
             <Select
               fullWidth
               labelId="category"
-              error={err.includes('category') && true}
+              error={err.includes("category") && true}
               id="category"
               name="category"
               value={expense.category}
@@ -150,16 +156,16 @@ const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
                 setExpense({ ...expense, category: event.target.value })
               }
             >
-              <MenuItem value={'food/drinks'}>Food & Drinks</MenuItem>
-              <MenuItem value={'shopping'}>Shopping</MenuItem>
-              <MenuItem value={'housing'}>Housing</MenuItem>
-              <MenuItem value={'transportation'}>Transportation</MenuItem>
-              <MenuItem value={'life/entertainment'}>
+              <MenuItem value={"food/drinks"}>Food & Drinks</MenuItem>
+              <MenuItem value={"shopping"}>Shopping</MenuItem>
+              <MenuItem value={"housing"}>Housing</MenuItem>
+              <MenuItem value={"transportation"}>Transportation</MenuItem>
+              <MenuItem value={"life/entertainment"}>
                 Life & Entertainment
               </MenuItem>
-              <MenuItem value={'communication/pc'}>Communication / PC</MenuItem>
-              <MenuItem value={'investments'}>Investments</MenuItem>
-              <MenuItem value={'other'}>Other</MenuItem>
+              <MenuItem value={"communication/pc"}>Communication / PC</MenuItem>
+              <MenuItem value={"investments"}>Investments</MenuItem>
+              <MenuItem value={"other"}>Other</MenuItem>
             </Select>
             <FormControlLabel
               control={
@@ -171,7 +177,7 @@ const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
                   onChange={() => {
                     setExpense({
                       ...expense,
-                      essential: !expense.essential,
+                      essential: !expense.essential
                     });
                   }}
                   color="primary"
@@ -185,7 +191,7 @@ const LogExpense = ({ handleClose, _id, refreshExpenses }) => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {_id ? 'Update Expense' : 'New Expense'}
+              {_id ? "Update Expense" : "New Expense"}
             </Button>
           </Box>
         </Box>

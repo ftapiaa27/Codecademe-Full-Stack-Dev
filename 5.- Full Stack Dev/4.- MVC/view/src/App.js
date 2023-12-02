@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers"
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { Container, Grid, Button, Typography } from '@mui/material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { VictoryPie, VictoryTooltip } from 'victory';
-import Modal from './components/Modal';
-import ExpenseList from './components/ExpenseList';
+import React, { useState, useEffect } from "react";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { Container, Grid, Button, Typography } from "@mui/material";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { VictoryPie, VictoryTooltip } from "victory";
+import Modal from "./components/Modal";
+import ExpenseList from "./components/ExpenseList";
 // import functions to interact with controller.
-import { expenseByCategory } from './utils';
-import './App.css';
+import { fetchExpenses, expenseByCategory } from "./utils";
+import "./App.css";
 
 function App() {
   const [expenses, setExpenses] = useState([]);
@@ -17,6 +17,7 @@ function App() {
   const [selectDate, setSelectDate] = useState(new Date());
   useEffect(() => {
     // update view from model w/ controller
+    fetchExpenses().then((res) => setExpenses(res));
   }, []);
 
   return (
@@ -27,8 +28,8 @@ function App() {
           container
           direction="row"
           sx={{
-            justifyContent: 'space-between',
-            padding: '1rem',
+            justifyContent: "space-between",
+            padding: "1rem"
           }}
           id="panel"
         >
@@ -36,14 +37,16 @@ function App() {
             <DatePicker
               label="Date of Expense"
               value={selectDate}
-              minDate={new Date('2017-01-01')}
+              minDate={new Date("2017-01-01")}
               onChange={(newValue) => {
                 setSelectDate(newValue);
                 // update view from model w/ controller
-                
+                fetchExpenses(newValue.getTime()).then((res) =>
+                  setExpenses(res)
+                );
               }}
-              slotProps={{ textField: { variant: 'outlined' } }}
-            />
+              slotProps={{ textField: { variant: "outlined" } }}
+            /> 
           </LocalizationProvider>
           <Button
             variant="outlined"
@@ -84,8 +87,8 @@ function App() {
           expenses={expenses}
           refreshExpenses={async () => {
             // update view from model w/ controller
-            const res = [];
-            setExpenses(res)
+            const res = fetchExpenses(selectDate.getTime());
+            setExpenses(res);
           }}
           _id={id}
           handleClose={() => {
